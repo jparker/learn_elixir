@@ -1,6 +1,7 @@
 # Learn
 
-**TODO: Add description**
+Nothing special to see; this is just code written while working through the
+book Programming Elixir ≥ 1.6.
 
 ## Installation
 
