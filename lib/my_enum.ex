@@ -1,5 +1,8 @@
 defmodule MyEnum do
-  def all?(_coll, pred \\ & &1)
+  @doc """
+  Implementation of Enum.all?/2.
+  """
+  def all?(_collection, pred \\ & &1)
 
   def all?([], _pred), do: true
 
@@ -7,6 +10,9 @@ defmodule MyEnum do
     if pred.(head), do: all?(tail, pred), else: false
   end
 
+  @doc """
+  Implementation of Enum.each/2.
+  """
   def each([], _func), do: :ok
 
   def each([head | tail], func) do
@@ -14,6 +20,9 @@ defmodule MyEnum do
     each(tail, func)
   end
 
+  @doc """
+  Implementation of Enum.filter/2.
+  """
   def filter([], _pred), do: []
 
   def filter([head | tail], pred) do
@@ -24,6 +33,9 @@ defmodule MyEnum do
     end
   end
 
+  @doc """
+  Implementation of Enum.split/2.
+  """
   def split([], _count), do: {[], []}
   def split(collection, 0), do: {[], collection}
 
@@ -37,6 +49,9 @@ defmodule MyEnum do
     if index < 0, do: split(collection, 0), else: split(collection, index)
   end
 
+  @doc """
+  Implementation of Enum.take/2.
+  """
   def take(collection, count) when count < 0 do
     start = length(collection) + count
     if start > 0, do: take(collection, count, start), else: collection

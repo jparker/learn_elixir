@@ -2,7 +2,7 @@ defmodule Chop do
   def guess(actual, a..b) do
     n = div(b - a, 2) + a
     send(self(), {:guess, "Is it #{n}"})
-    guess(actual, a..b, div(b - a, 2) + a)
+    guess(actual, a..b, n)
   end
 
   defp guess(actual, _range, actual), do: actual

@@ -9,9 +9,12 @@ defmodule MyEnumTest do
 
   test 'all?' do
     assert MyEnum.all?([])
-    assert MyEnum.all?([true, true])
-    refute MyEnum.all?([true, false])
+    assert MyEnum.all?([true, 42])
     assert MyEnum.all?([2, 4], &Integer.is_even/1)
+
+    refute MyEnum.all?([true, false])
+    refute MyEnum.all?([true, nil])
+    refute MyEnum.all?([1, true], &is_number/1)
     refute MyEnum.all?([2, 3], &Integer.is_even/1)
   end
 
@@ -31,6 +34,7 @@ defmodule MyEnumTest do
     assert [] = MyEnum.filter([1, 3], &Integer.is_even/1)
     assert [2, 4] = MyEnum.filter([1, 2, 3, 4], &Integer.is_even/1)
     assert [1, 3] = MyEnum.filter([1, 2, 3, 4], &Integer.is_odd/1)
+    assert [1, 2] = MyEnum.filter([1, true, 2], &is_number/1)
   end
 
   test 'split' do
